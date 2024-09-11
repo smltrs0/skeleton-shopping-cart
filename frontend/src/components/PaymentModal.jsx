@@ -6,9 +6,16 @@ import ModalSteps from './PaymentModal/ModalSteps';
 import ModalNavigation from './PaymentModal/ModalNavigation';
 import RenderStepContent from './PaymentModal/RenderStepContent';
 
-const PaymentModal = ({ isOpen, onClose }) => {
-	const [step, setStep] = useState(1);
+import { useDispatch, useSelector } from 'react-redux';
+import { accepTerms } from '../features/shopping-cart/shoppingCartSlice';
 
+const PaymentModal = ({ isOpen, onClose }) => {
+	const [step, setStep] = useState(0);
+
+	const dispatch = useDispatch();
+	const termsAccepted = useSelector(
+		(state) => state.shoppincart.accepTerms,
+	);
 	const nextStep = () => setStep((prevStep) => Math.min(prevStep + 1, 3));
 	const prevStep = () => setStep((prevStep) => Math.max(prevStep - 1, 1));
 
@@ -16,6 +23,9 @@ const PaymentModal = ({ isOpen, onClose }) => {
 		setStep(1);
 		onClose();
 	};
+
+	const handleTermsChange = (event) =>
+		dispatch(accepTerms(event.target.checked));
 
 	if (!isOpen) return null;
 
@@ -25,18 +35,24 @@ const PaymentModal = ({ isOpen, onClose }) => {
 				<ModalHeader closeModal={closeModal} />
 				<ModalSteps step={step} />
 				<div>
-					<RenderStepContent step={step} />
+					<RenderStepContent
+						step={step}
+						handleTermsChange={handleTermsChange}
+					/>
 				</div>
-				<ModalNavigation
-					step={step}
-					prevStep={prevStep}
-					nextStep={nextStep}
-					closeModal={closeModal}
-				/>
+				{termsAccepted && (
+					<ModalNavigation
+						step={step}
+						prevStep={prevStep}
+						nextStep={nextStep}
+						closeModal={closeModal}
+					/>
+				)}
 			</div>
 		</div>
 	);
 };
+
 PaymentModal.propTypes = {
 	isOpen: PropTypes.bool.isRequired,
 	onClose: PropTypes.func.isRequired,

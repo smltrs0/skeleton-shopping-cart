@@ -6,6 +6,7 @@ export const shoppingCart = createSlice({
 		shoppingCart: [],
 		itemsMessage: false,
 		itemsMessageError: false,
+		accepTerms: false,
 	},
 	reducers: {
 		addItemToCart: (state, action) => {
@@ -38,6 +39,9 @@ export const shoppingCart = createSlice({
 		findItem: (state, action) => {
 			state.find((item) => item.id === action.payload);
 		},
+		accepTerms: (state, action) => {
+			state.accepTerms = action.payload;
+		}
 	},
 });
 
@@ -47,5 +51,6 @@ export const {
 	findItem,
 	setQuality,
 	clearShoppingCartNotification,
+	accepTerms,
 } = shoppingCart.actions;
 export default shoppingCart.reducer;
