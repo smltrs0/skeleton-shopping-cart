@@ -33,25 +33,5 @@ const paymentController = new PaymentController(paymentService);
  */
 router.post('/payments', (req, res) => paymentController.createPayment(req, res));
 
-/**
- * @swagger
- * /payments/{id}:
- *   get:
- *     summary: Get a payment by ID
- *     tags: [Payments]
- *     parameters:
- *       - in: path
- *         name: id
- *         schema:
- *           type: integer
- *         required: true
- *         description: Payment ID
- *     responses:
- *       200:
- *         description: Payment found
- *       404:
- *         description: Payment not found
- */
-router.get('/payments/:id', (req, res) => paymentController.getPayment(req, res));
 
 export default router;
