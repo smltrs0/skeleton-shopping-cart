@@ -1,7 +1,8 @@
-import React, { useState } from 'react'; // Importa React si usas JSX
+import React, { useState } from 'react';
+
 import PaymentMethodSelection from './PaymentMethodSelection';
-import PaymentDetails from './PaymentModal/PaymentDetails';
-import PaymentConfirmation from './PaymentModal/PaymentConfirmation';
+import PaymentDetails from '../PaymentModal/PaymentDetails';
+import PaymentConfirmation from '../PaymentModal/PaymentConfirmation';
 
 const RenderStepContent = ({ step = 1 }) => {
 	const [paymentMethod, setPaymentMethod] = useState('');
