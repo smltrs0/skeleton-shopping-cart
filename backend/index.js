@@ -7,7 +7,7 @@ import setupSwagger from './src/swagger.js';
 const app = express();
 app.use(bodyParser.json());
 app.use('/api', paymentRoutes);
-app.use('/api', itemsRoutes);
+app.use('/api', paymentRoutes);
 
 // Configurar Swagger
 setupSwagger(app);
