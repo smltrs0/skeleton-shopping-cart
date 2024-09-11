@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 import PaymentMethodSelection from './PaymentMethodSelection';
 import PaymentDetails from '../PaymentModal/PaymentDetails';
@@ -21,6 +22,10 @@ const RenderStepContent = ({ step = 1 }) => {
 		default:
 			return <></>;
 	}
+};
+
+RenderStepContent.propTypes = {
+	step: PropTypes.number.isRequired,
 };
 
 export default RenderStepContent;
