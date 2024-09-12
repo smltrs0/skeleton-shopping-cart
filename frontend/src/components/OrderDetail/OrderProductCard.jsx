@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const OrderProductCard = ({ order }) => {
 	return (
@@ -24,6 +25,19 @@ const OrderProductCard = ({ order }) => {
 			</div>
 		</div>
 	);
+};
+
+OrderProductCard.propTypes = {
+	order: PropTypes.shape({
+		product: PropTypes.shape({
+			imageSrc: PropTypes.string.isRequired,
+			name: PropTypes.string.isRequired,
+			price: PropTypes.number.isRequired,
+		}).isRequired,
+		name: PropTypes.string.isRequired,
+		created_at: PropTypes.string.isRequired,
+		quantity: PropTypes.number.isRequired,
+	}).isRequired,
 };
 
 export default OrderProductCard;
