@@ -1,6 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import OrderImage from "./OrderImage";
+import '@testing-library/jest-dom/extend-expect'; // Add this line
+import OrderImage from "../../../src/components/Orders/OrderImage";
 
 describe("OrderImage", () => {
 	test("should render the image with correct src and alt", () => {
