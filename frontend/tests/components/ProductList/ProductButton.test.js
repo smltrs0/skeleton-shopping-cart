@@ -1,5 +1,5 @@
-import { render, fireEvent } from "@testing-library/react";
-import ProductButton from "./ProductButton";
+import { render, fireEvent, screen } from "@testing-library/react";
+import ProductButton from "../../../src/components/ProductList/ProductButton";
 
 describe("ProductButton", () => {
 	it("renders without error", () => {
@@ -8,10 +8,8 @@ describe("ProductButton", () => {
 
 	it("calls onClick callback correctly", () => {
 		const mockOnClick = jest.fn();
-		const { getByText } = render(
-			<ProductButton onClick={mockOnClick} />,
-		);
-		const productButton = getByText("Comprar");
+		render(<ProductButton onClick={mockOnClick} />);
+		const productButton = screen.getByText("Comprar");
 
 		fireEvent.click(productButton);
 
