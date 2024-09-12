@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const ProductDetails = ({ name, href, color, price }) => {
 	return (
 		<div className="mt-4 flex justify-between">
@@ -10,6 +12,13 @@ const ProductDetails = ({ name, href, color, price }) => {
 			<p className="text-sm font-medium text-gray-900">{price}</p>
 		</div>
 	);
+};
+
+ProductDetails.propTypes = {
+	name: PropTypes.string.isRequired,
+	href: PropTypes.string.isRequired,
+	color: PropTypes.string.isRequired,
+	price: PropTypes.string.isRequired,
 };
 
 export default ProductDetails;
