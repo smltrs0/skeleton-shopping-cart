@@ -1,5 +1,6 @@
 import { render } from "@testing-library/react";
-import ProductImage from "./ProductImage";
+import '@testing-library/jest-dom/extend-expect'; // Importa jest-dom para usar toBeInTheDocument
+import ProductImage from "../../../src/components/ProductList/ProductImage";
 
 describe("ProductImage", () => {
 	it("renders without error", () => {
@@ -7,10 +8,10 @@ describe("ProductImage", () => {
 	});
 
 	it("displays image with correct src and alt attributes", () => {
-		const testSrc = "test-image.jpg";
+		const testSrc = "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg";
 		const testAlt = "Test Image";
 		const { getByAltText } = render(
-			<ProductImage src={testSrc} alt={testAlt} />,
+			<ProductImage src={testSrc} alt={testAlt} />
 		);
 		const productImage = getByAltText(testAlt);
 
