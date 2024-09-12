@@ -11,4 +11,10 @@ const getShoppingCart = async (data) => {
 	return response.data;
 };
 
-export { saveShoppingCart, getShoppingCart };
+
+const createPurchaseOrder = async (data) => {
+	const response = await axios.post(API_URL + "payments", { ...data });
+	return response.data;
+}
+
+export { saveShoppingCart, getShoppingCart, createPurchaseOrder };

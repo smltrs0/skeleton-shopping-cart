@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { fetchPurchaseOrder } from "./shoppingCartActions";
 
 export const shoppingCart = createSlice({
 	name: "shoppincart",
@@ -43,6 +44,17 @@ export const shoppingCart = createSlice({
 			state.accepTerms = action.payload;
 		}
 	},
+	extraReducers: (builder) => {
+		builder
+			.addCase(fetchPurchaseOrder.pending, (state) => { })
+			.addCase(fetchPurchaseOrder.fulfilled, (state, action) => {
+				state.meta = action.payload.meta;
+				state.itemsdata = action.payload.data;
+			})
+			.addCase(fetchPurchaseOrder.rejected, (state, action) => {
+				console.warn("Sin acceso");
+			});
+	}
 });
 
 export const {
