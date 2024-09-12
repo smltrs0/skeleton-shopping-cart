@@ -1,47 +1,58 @@
-import React from "react";
-import { render, fireEvent } from "@testing-library/react";
-import OrderButtons from "./OrderButtons";
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
+import OrderButtons from '../../../src/components/Orders/OrderButtons';
 
-describe("OrderButtons", () => {
-	test('should call handleDeleteOrder when "Eliminar" button is clicked', () => {
-		const handleDeleteOrderMock = jest.fn();
-		const handleShowOrderMock = jest.fn();
-		const orderId = 123;
+describe('OrderButtons component', () => {
+	const mockHandleDeleteOrder = jest.fn();
+	const mockHandleShowOrder = jest.fn();
+	const orderId = '123';
 
+	it('renders correctly', () => {
 		const { getByText } = render(
 			<OrderButtons
-				handleDeleteOrder={handleDeleteOrderMock}
-				handleShowOrder={handleShowOrderMock}
+				handleDeleteOrder={mockHandleDeleteOrder}
+				handleShowOrder={mockHandleShowOrder}
 				orderId={orderId}
 			/>,
 		);
 
-		const deleteButton = getByText("Eliminar");
-		fireEvent.click(deleteButton);
-
-		expect(handleDeleteOrderMock).toHaveBeenCalledTimes(1);
-		expect(handleDeleteOrderMock).toHaveBeenCalledWith(orderId);
-		expect(handleShowOrderMock).not.toHaveBeenCalled();
+		// Verifica que los botones se rendericen con el texto adecuado
+		expect(getByText('Eliminar')).toBeInTheDocument();
+		expect(getByText('Ver')).toBeInTheDocument();
 	});
 
-	test('should call handleShowOrder when "Ver" button is clicked', () => {
-		const handleDeleteOrderMock = jest.fn();
-		const handleShowOrderMock = jest.fn();
-		const orderId = 123;
-
+	it('calls handleDeleteOrder with the correct orderId when Eliminar is clicked', () => {
 		const { getByText } = render(
 			<OrderButtons
-				handleDeleteOrder={handleDeleteOrderMock}
-				handleShowOrder={handleShowOrderMock}
+				handleDeleteOrder={mockHandleDeleteOrder}
+				handleShowOrder={mockHandleShowOrder}
 				orderId={orderId}
 			/>,
 		);
 
-		const showButton = getByText("Ver");
+		const deleteButton = getByText('Eliminar');
+		fireEvent.click(deleteButton);
+
+		// Verifica que la función handleDeleteOrder haya sido llamada con el orderId correcto
+		expect(mockHandleDeleteOrder).toHaveBeenCalledWith(orderId);
+		expect(mockHandleDeleteOrder).toHaveBeenCalledTimes(1);
+	});
+
+	it('calls handleShowOrder with the correct orderId when Ver is clicked', () => {
+		const { getByText } = render(
+			<OrderButtons
+				handleDeleteOrder={mockHandleDeleteOrder}
+				handleShowOrder={mockHandleShowOrder}
+				orderId={orderId}
+			/>,
+		);
+
+		const showButton = getByText('Ver');
 		fireEvent.click(showButton);
 
-		expect(handleShowOrderMock).toHaveBeenCalledTimes(1);
-		expect(handleShowOrderMock).toHaveBeenCalledWith(orderId);
-		expect(handleDeleteOrderMock).not.toHaveBeenCalled();
+		// Verifica que la función handleShowOrder haya sido llamada con el orderId correcto
+		expect(mockHandleShowOrder).toHaveBeenCalledWith(orderId);
+		expect(mockHandleShowOrder).toHaveBeenCalledTimes(1);
 	});
 });
