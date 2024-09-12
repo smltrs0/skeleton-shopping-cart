@@ -4,7 +4,14 @@ import { IVA, weightPerItem, shippingRatePerKg } from '../../env';
 
 const PaymentConfirmation = () => {
 	const [formData, setFormData] = useState({
-		direccion: '',
+		address_line_1: '',
+		address_line_2: '',
+		country: 'CO',
+		region: '',
+		city: '',
+		name: '',
+		phone_number: '',
+		postal_code: '',
 		importe: '',
 		tarifaBase: '',
 		tarifaEnvio: '',
@@ -46,8 +53,17 @@ const PaymentConfirmation = () => {
 
 	const validate = () => {
 		let tempErrors = {};
-		if (!formData.direccion)
-			tempErrors.direccion = 'La dirección de envío es requerida.';
+		if (!formData.address_line_1)
+			tempErrors.address_line_1 =
+				'La dirección línea 1 es requerida.';
+		if (!formData.city) tempErrors.city = 'La ciudad es requerida.';
+		if (!formData.region) tempErrors.region = 'La región es requerida.';
+		if (!formData.name) tempErrors.name = 'El nombre es requerido.';
+		if (!formData.phone_number)
+			tempErrors.phone_number =
+				'El número de teléfono es requerido.';
+		if (!formData.postal_code)
+			tempErrors.postal_code = 'El código postal es requerido.';
 		if (!formData.importe || isNaN(formData.importe))
 			tempErrors.importe =
 				'El importe del producto debe ser un número válido.';
@@ -84,22 +100,148 @@ const PaymentConfirmation = () => {
 			<form onSubmit={handleSubmit}>
 				<div className="mb-4">
 					<label
-						htmlFor="direccion"
+						htmlFor="address_line_1"
 						className="block text-gray-700"
 					>
-						Dirección de envío
+						Dirección Línea 1 *
 					</label>
 					<input
 						type="text"
-						id="direccion"
-						name="direccion"
-						value={formData.direccion}
+						id="address_line_1"
+						name="address_line_1"
+						value={formData.address_line_1}
 						onChange={handleChange}
 						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
 					/>
-					{errors.direccion && (
+					{errors.address_line_1 && (
 						<p className="text-red-500 text-sm mt-1">
-							{errors.direccion}
+							{errors.address_line_1}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="address_line_2"
+						className="block text-gray-700"
+					>
+						Dirección Línea 2
+					</label>
+					<input
+						type="text"
+						id="address_line_2"
+						name="address_line_2"
+						value={formData.address_line_2}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.address_line_2 && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.address_line_2}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="city"
+						className="block text-gray-700"
+					>
+						Ciudad *
+					</label>
+					<input
+						type="text"
+						id="city"
+						name="city"
+						value={formData.city}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.city && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.city}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="region"
+						className="block text-gray-700"
+					>
+						Región *
+					</label>
+					<input
+						type="text"
+						id="region"
+						name="region"
+						value={formData.region}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.region && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.region}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="name"
+						className="block text-gray-700"
+					>
+						Nombre
+					</label>
+					<input
+						type="text"
+						id="name"
+						name="name"
+						value={formData.name}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.name && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.name}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="phone_number"
+						className="block text-gray-700"
+					>
+						Número de teléfono *
+					</label>
+					<input
+						type="text"
+						id="phone_number"
+						name="phone_number"
+						value={formData.phone_number}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.phone_number && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.phone_number}
+						</p>
+					)}
+				</div>
+				<div className="mb-4">
+					<label
+						htmlFor="postal_code"
+						className="block text-gray-700"
+					>
+						Código postal
+					</label>
+					<input
+						type="text"
+						id="postal_code"
+						name="postal_code"
+						value={formData.postal_code}
+						onChange={handleChange}
+						className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+					/>
+					{errors.postal_code && (
+						<p className="text-red-500 text-sm mt-1">
+							{errors.postal_code}
 						</p>
 					)}
 				</div>

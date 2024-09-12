@@ -1,5 +1,3 @@
-
-
 import { createSlice } from '@reduxjs/toolkit';
 import { generatePaymentIntent } from './paymentsActions';
 
@@ -8,15 +6,18 @@ const initialState = {
             cardNumber: '',
             cardName: '',
             expiryDate: '',
-            cvv: ''
+            cvv: '',
+            token: ''
       },
       shipment: {
-            name: '',
-            email: '',
-            address: '',
-            city: '',
-            state: '',
-            zip: ''
+            address_line_1: "",
+            address_line_2: "",
+            country: "CO",
+            region: "",
+            city: "",
+            name: "",
+            phone_number: "",
+            postal_code: ""
       }
 };
 
@@ -35,7 +36,6 @@ const paymentSlice = createSlice({
             builder
                   .addCase(generatePaymentIntent.pending, (state) => { })
                   .addCase(generatePaymentIntent.fulfilled, (state, action) => {
-
                         console.log(action.payload);
                   })
                   .addCase(generatePaymentIntent.rejected, (state, action) => {
@@ -44,6 +44,6 @@ const paymentSlice = createSlice({
       }
 });
 
-export const { updateCardInfo, updateShipmentInfo } = paymentSlice.actions;
+export const { updateCardInfo, updateShipmentInfo, updateShippingAddress } = paymentSlice.actions;
 
 export default paymentSlice.reducer;
