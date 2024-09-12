@@ -1,6 +1,7 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import Wellcome from "./Wellcome";
+import '@testing-library/jest-dom/extend-expect'; // Add this line
+import Wellcome from "../../src/pages/Wellcome";
 
 describe("Wellcome Component", () => {
 	test("renders welcome message", () => {

@@ -1,6 +1,7 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import OrderProductCard from "./OrderProductCard";
+import { render, screen } from "@testing-library/react";
+import '@testing-library/jest-dom/extend-expect'; // Import the jest-dom library
+import OrderProductCard from "../../../src/components/OrderDetail/OrderProductCard";
 
 describe("OrderProductCard", () => {
 	test("should render the order product card with correct data", () => {
@@ -14,19 +15,16 @@ describe("OrderProductCard", () => {
 			quantity: 2,
 		};
 
-		const { getByAltText, getByText } = render(
-			<OrderProductCard order={order} />,
-		);
+		render(<OrderProductCard order={order} />);
 
-		const productName = getByText(order.product.name);
+		const productName = screen.getByText(order.product.name);
 		expect(productName).toBeInTheDocument();
 
-		const createdAt = getByText(
+		const createdAt = screen.getByText(
 			`Fecha de creación: ${order.created_at}`,
 		);
 		expect(createdAt).toBeInTheDocument();
-
-		const quantity = getByText(`Cantidad: ${order.quantity}`);
+		const quantity = screen.getByText(`Cantidad: ${order.quantity}`);
 		expect(quantity).toBeInTheDocument();
 	});
 });
